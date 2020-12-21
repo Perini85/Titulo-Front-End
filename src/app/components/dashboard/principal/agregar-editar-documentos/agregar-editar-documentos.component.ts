@@ -20,6 +20,10 @@ documento: Documento
 clientes: any;
 tipoDoc: any
 
+
+ archivosServer: Documento;
+ lastPK: number;
+
   constructor(private documentoService: DocumentoService, private fb: FormBuilder,
               private router: Router, private route:ActivatedRoute,
               private clienteService: ClienteService,
@@ -30,7 +34,8 @@ tipoDoc: any
               numeroDoc :['',Validators.required],
           
               idCliente: ['',Validators.required],
-              tipoDocumentoId: ['',Validators.required]
+              tipoDocumentoId: ['',Validators.required],
+              imagen: ['']
             
 
 
@@ -55,16 +60,17 @@ tipoDoc: any
   guardarDocumentos(){
  
     if(this.accion==='Agregar'){
+      
       const documento: Documento ={
 
         valor: this.documentos.get('valor').value,
         numeroDoc: this.documentos.get('numeroDoc').value,
         idCliente: this.documentos.get('idCliente').value,
-        tipoDocumentoId: this.documentos.get('tipoDocumentoId').value
-
+        tipoDocumentoId: this.documentos.get('tipoDocumentoId').value,
+        imagen: this.documentos.get('imagen').value
 
       };
-     
+      this.subirArchivo(documento);
       this.documentoService.CrearDocumento(documento).subscribe(data =>{
         this.router.navigate(['/dashboard/documentos'])
         console.log(this.documento)
@@ -76,15 +82,17 @@ tipoDoc: any
       valor: this.documentos.get('valor').value,
       numeroDoc: this.documentos.get('numeroDoc').value,
       idCliente: this.documentos.get('idCliente').value,
-      tipoDocumentoId: this.documentos.get('tipoDocumentoId').value
-     
+      tipoDocumentoId: this.documentos.get('tipoDocumentoId').value,
+      imagen: this.documentos.get('imagen').value
       
 
    };
- 
-    //  this.documentos.value.idCliente =parseInt(this.documentos.value.idCliente)
-    //  this.documentos.value.tipoDocumentoId =parseInt(this.documentos.value.tipoDocumentoId)
+      this.documentos.value.idCliente =parseInt(this.documentos.value.idCliente)
+      this.documentos.value.tipoDocumentoId =parseInt(this.documentos.value.tipoDocumentoId)
    this.documentoService.ActualizarDocumento(this.idDocumento,documento).subscribe(data =>{
+    
+
+    
     this.router.navigate(['/dashboard/documentos'])
    });
 
@@ -101,8 +109,8 @@ tipoDoc: any
        this.documentos.patchValue({
          valor: data.valor,
          numeroDoc: data.numeroDoc,
-         idCliente: data.idCliente,
-         tipoDocumentoId: data.tipoDocumentoId
+          idCliente: data.idCliente,
+          tipoDocumentoId: data.tipoDocumentoId
       
             
        });
@@ -124,5 +132,19 @@ tipoDoc: any
       this.tipoDoc = data
     })
   }
+
+  subirArchivo(documento: Documento){
+    this.documentoService.uploadFile(this.documento).subscribe(Response => {})
+  }
+
+  fileEvent(fileInput: Event) {
+    let file = (<HTMLInputElement>fileInput.target).files[0];
+
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+      this.documento = new Documento();
+    }
+  }
+
+  
 
 }

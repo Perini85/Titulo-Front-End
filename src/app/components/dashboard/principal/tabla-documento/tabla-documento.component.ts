@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Clientes } from 'src/app/models/clientes';
 import { Documento } from 'src/app/models/documento';
 import { DocumentoService } from 'src/app/services/documento.service';
 
@@ -12,7 +13,8 @@ import { DocumentoService } from 'src/app/services/documento.service';
 export class TablaDocumentoComponent implements OnInit {
   listDocumentos: Documento[];
   cabeceras: string[] = ["Id Documento","N° documento","monto","Cliente asociado", "Fecha","Editar","Eliminar"];
-
+  p: number = 1;
+  clientes:Clientes;
   constructor(private documentoService: DocumentoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class TablaDocumentoComponent implements OnInit {
 
   Eliminar(id: number): void{
     console.log(id)
-    if (confirm('Esta seguro que desea eliminar el cliente?')){
+    if (confirm('Esta seguro que desea eliminar el documento?')){
 
       this.documentoService.EliminarDocumento(id).subscribe(data =>{
         this.cargarDocumentos()

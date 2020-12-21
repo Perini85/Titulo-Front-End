@@ -32,7 +32,7 @@
             <select class="form-control" formControlName="idCliente">
               <option value=" ">--Seleccione--</option>
 
-      <option [value]="cliente.id" *ngFor="let cliente of clientes" >{{cliente.nombres}}</option>
+      <option [value]="cliente.id" *ngFor="let cliente of clientes" >{{cliente.nombres + " " +cliente.apellidos}}</option>
             </select>
             <span class="text-danger ml-3"
             *ngIf="documentos.get('idCliente').hasError('required')&& documentos.get('idCliente').touched">
@@ -55,6 +55,12 @@
             El Tipo documento es requerido</span>
             
           </div> 
+
+          <div *ngIf="this.accion=='Agregar'">
+            <input type="file" (change)="fileEvent($event)"  formControlName="imagen"/>
+          </div>
+        
+          
 
           <div class="form-group">
             <button class="btn btn-success float-right" [disabled]= "documentos.invalid">Aceptar</button>

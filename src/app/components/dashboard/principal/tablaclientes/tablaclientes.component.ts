@@ -10,7 +10,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class TablaclientesComponent implements OnInit {
 lisClientes: Clientes[] =[];
-cabeceras: string[] = ["Id Cliente","Nombres","pellidos","Telefono", "Correo","Editar", "Eiminar"];
+cabeceras: string[] = ["Id Cliente","Nombres","Apellidos","Telefono", "Correo", "  Editar", "  Eiminar"];
 p: number = 1;
 
   constructor(private clienteService: ClienteService,  private toastr: ToastrService) { }
