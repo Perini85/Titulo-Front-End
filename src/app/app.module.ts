@@ -8,6 +8,15 @@ import {ReactiveFormsModule} from '@angular/forms'
 //ngx-toastr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import {NgxPaginationModule} from 'ngx-pagination';
+
+//angular Material
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import {MatIconModule}  from '@angular/material/icon';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +33,10 @@ import { TablaclientesComponent } from './components/dashboard/principal/tablacl
 import { AgregarEditarClientesComponent } from './components/dashboard/principal/agregar-editar-clientes/agregar-editar-clientes.component';
 import { TablaDocumentoComponent } from './components/dashboard/principal/tabla-documento/tabla-documento.component';
 import { AgregarEditarDocumentosComponent } from './components/dashboard/principal/agregar-editar-documentos/agregar-editar-documentos.component';
+import { FooterComponent } from './components/dashboard/navbar/navbar/footer/footer.component';
+import { VerClientesComponent } from './components/dashboard/principal/ver-clientes/ver-clientes.component';
+import { TablaProductoComponent } from './components/dashboard/principal/tabla-producto/tabla-producto.component';
+import { AgregarEditarProductosComponent } from './components/dashboard/principal/agregar-editar-productos/agregar-editar-productos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +52,11 @@ import { AgregarEditarDocumentosComponent } from './components/dashboard/princip
     TablaclientesComponent,
     AgregarEditarClientesComponent,
     TablaDocumentoComponent,
-    AgregarEditarDocumentosComponent
+    AgregarEditarDocumentosComponent,
+    FooterComponent,
+    VerClientesComponent,
+    TablaProductoComponent,
+    AgregarEditarProductosComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +64,11 @@ import { AgregarEditarDocumentosComponent } from './components/dashboard/princip
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxFileDropModule,
+    NgxPaginationModule,
+    MatTableModule,
+    MatInputModule,
+    MatIconModule,
     ToastrModule.forRoot()
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },],

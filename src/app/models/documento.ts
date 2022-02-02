@@ -8,6 +8,7 @@ export class Documento {
     tipoDocumentoId: number;
     usuarioId?: number;
     fechaCreacion?: Date;
+    imagen: string;
 
 }
 

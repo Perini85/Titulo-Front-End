@@ -42,4 +42,13 @@ export class DocumentoService {
     return this.http.delete( this.myAppUrl + this.myApiUrl +  idDocumento,this.httpOtions);
   }
 
+
+  uploadFile(File): Observable<any>{
+    var json = JSON.stringify(File);
+   
+    return this.http.post(this.myAppUrl + this.myApiUrl, File,this.httpOtions)
+  }
+
+
+
 }
